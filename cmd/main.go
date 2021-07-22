@@ -35,7 +35,7 @@ func main() {
 
 		times := strings.Split(t, ",")
 
-		// if you want to use with date substitute 2006-01-02T15:04:05
+		// if you want to use with date substitute 2006-01-02T15:04:05 to layout
 		tArrival, _ := time.Parse("15:04", times[0])
 		tDeparture, _ := time.Parse("15:04", times[1])
 
@@ -46,13 +46,9 @@ func main() {
 		TimeCars = append(TimeCars, departure)
 	}
 
-	//fmt.Println(TimeCars)
-
 	sort.SliceStable(TimeCars, func(i, j int) bool {
 		return TimeCars[i].timeA.Before(TimeCars[j].timeA)// not including scope, example: 13:30 and 13:30
 	})
-
-	fmt.Println(TimeCars)
 
 	var max, count int
 
@@ -68,14 +64,3 @@ func main() {
 	}
 	fmt.Println(max)
 }
-// Example 1, Answer:2
-//12:22,13:30
-//13:01,16:00
-//13:30,15:00
-//15:59,20:00
-
-// Example 1, Answer:3
-//12:22,13:31
-//13:01,16:00
-//13:30,15:00
-//15:59,20:00

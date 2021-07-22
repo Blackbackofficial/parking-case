@@ -22,5 +22,5 @@ Enter arrival && departure:
 13:01,16:00
 13:30,15:00
 15:59,20:00
-2
+Count: 2
 ```

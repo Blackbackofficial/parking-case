@@ -4,12 +4,12 @@ import (
 	"fmt"
 	"os"
 	"sort"
-	"strconv"
 	"strings"
+	"time"
 )
 
 type TimeCar struct {
-	time int
+	timeA time.Time
 	isArrival bool
 }
 
@@ -25,43 +25,39 @@ func main() {
 	}
 	fmt.Println("Enter arrival && departure:")
 
+	var t string
 	for i := 0; i < countCar; i++ {
-		var time string
-		_, err := fmt.Fscan(os.Stdin, &time)
+		_, err := fmt.Fscan(os.Stdin, &t)
 		if err != nil {
 			fmt.Println(err)
 			os.Exit(1)
 		}
 
-		times := strings.Split(time, ",")
+		times := strings.Split(t, ",")
 
-		start, err := strconv.Atoi(times[0])
-		if err != nil {
-			fmt.Println(err)
-		}
-		arrival := TimeCar{start,true}
+		// if you want to use with date substitute 2006-01-02T15:04:05
+		tArrival, _ := time.Parse("15:04", times[0])
+		tDeparture, _ := time.Parse("15:04", times[1])
+
+		arrival := TimeCar{tArrival,true}
 		TimeCars = append(TimeCars, arrival)
 
-		end, err := strconv.Atoi(times[1])
-		if err != nil {
-			fmt.Println(err)
-		}
-		departure := TimeCar{end,false}
+		departure := TimeCar{tDeparture,false}
 		TimeCars = append(TimeCars, departure)
 	}
 
-	fmt.Println(TimeCars)
+	//fmt.Println(TimeCars)
 
 	sort.SliceStable(TimeCars, func(i, j int) bool {
-		return TimeCars[i].time < TimeCars[j].time
+		return TimeCars[i].timeA.Before(TimeCars[j].timeA)// not including scope, example: 13:30 and 13:30
 	})
 
 	fmt.Println(TimeCars)
 
 	var max, count int
 
-	for _, time := range TimeCars{
-		if time.isArrival {
+	for _, timeCar := range TimeCars {
+		if timeCar.isArrival {
 			count++
 		} else {
 			count--
@@ -72,3 +68,14 @@ func main() {
 	}
 	fmt.Println(max)
 }
+// Example 1, Answer:2
+//12:22,13:30
+//13:01,16:00
+//13:30,15:00
+//15:59,20:00
+
+// Example 1, Answer:3
+//12:22,13:31
+//13:01,16:00
+//13:30,15:00
+//15:59,20:00

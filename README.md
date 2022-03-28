@@ -1,18 +1,18 @@
 # parking_case
 
-`II` Задача о парковке ⭐⭐
+`II` Parking problem ⭐⭐
 
-Дана последоватльность пар вида `{start, end}`
+Given a sequence of pairs of the form `{start, end}`
 ```
-start - время заезда автотранспорта на парковку
-end - время выезда автотранспорта с парковки
+start - time of arrival of vehicles to the parking lot
+end - time of departure of vehicles from the parking lot
 ```
-Нужно найти максимальное количество автотранспорта, находящихся одновременно на парковке
+You need to find the maximum number of vehicles that are simultaneously in the parking lot
 
-Что хочется увидеть:
-1. Алгоритм с оптимальной реализацией по памяти
+What would you like to see:
+1. Algorithm with optimal memory implementation
 
-## Example:
+## example:
 
 ```
 Enter car's count
